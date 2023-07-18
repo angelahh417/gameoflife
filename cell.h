@@ -1,37 +1,29 @@
+#ifndef CELL_H
+#define CELL_H
 /// Create a 2D array of cell objects
 
 class Cell {
     bool alive; // Binary state of Dead (F) or Alive (T)
     bool mutated; // True or False depending on if cell state changed
-
+    
     public:
-        Cell() {
-            alive = false;
-            mutated = false;
-        }
+        Cell();
 
         // the "this" keyword is a pointer (it points to a memory address that contains the data we want. not the data itself)
         // "*" is the dereference symbol. it means: give me the data at the memory address your variable points to
-        Cell(bool alive) {
-            this->alive = alive; // -> == (*).
-            mutated = false;
-        }
+        Cell(bool);
 
-        bool getAlive() {
-            return alive;
-        }
+        bool getAlive();
 
-        void setAlive(bool alive) {
-            this->alive = alive;
-        }        
+        void setAlive(bool);        
 
-        bool getMutated() {
-            return mutated;
-        }
+        bool getMutated();
         
-        void setMutated(bool mutated) {
-            this->mutated = mutated;
-        }
+        void setMutated(bool);
 
+        void killCell();
+
+        void reviveCell();
 
 };
+#endif

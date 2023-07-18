@@ -1,91 +1,22 @@
-#include <iostream>
-#include <vector>
-#include "cell.h"
+#include "gameboard.h"
+#include <assert.h>
 
-using namespace std;
-
-const int WIDTH = 50;
-const int HEIGHT = 25;
-
-
-void testCell() {
-    cout << "Hello World!" << endl;
-
-    vector<Cell> vc;
-    Cell cell_1;
-    Cell cell_2;
-    Cell cell_3(true);
-    Cell cell_4(true);
-
-    vc.push_back(cell_1);
-    vc.push_back(cell_2);
-    vc.push_back(cell_3);
-    vc.push_back(cell_4);
-
-    for(Cell cell : vc) {
-        cout << cell.getAlive() << " " << cell.getMutated() << endl;
-    }
-    
-    
-}
-
-
-// & = reference
-// we are passing by reference, not value
-void initGameBoard(vector<vector<Cell>> &vec) { 
-    for (int i = 0; i < HEIGHT; i++) {
-        vector<Cell> v1;
-        
-        for (int j = 0; j < WIDTH; j++) {
-            v1.push_back(Cell());
-        }
-        vec.push_back(v1);
-
-    }
-    // vec.push_back(Cell());
-    // vec.push_back(Cell(true));
-}
-
-// pass by value
-// vec is a new vector that is copied from the caller's vector
-// when this method ends, vec gets garbage collected and any changes to it are gone
-// the original vector never was changed becasue vec is just a copy of its values
-void initGameBoard2(vector<Cell> vec) {
-    // ...
-}
-
-void printing(const vector<vector<Cell>> &vec) {
-    //vector<Cell>
-    for(vector<Cell> innerVec : vec) {
-        for(Cell cell : innerVec) {
-            cout << "(" << cell.getAlive() << "," << cell.getMutated() << ")";
-        }
-        cout << endl;
-    }
-}
-
-void printGameBoard(const vector<vector<Cell>> &vec) {
-    for(vector<Cell> innerVec : vec) {
-        for(Cell cell : innerVec) {
-            if (cell.getAlive()) {
-                cout << "@";
-            } else {
-                cout << " ";
-            }
-        }
-        cout << endl;
-    }
-}
+#define ASSERT(x, msg) assert(((void) msg, x))
 
 int main() {
-    vector<vector<Cell>> gameBoard;
-    initGameBoard(gameBoard);
-    // printing(gameBoard);
-    // printGameBoard(gameBoard);
 
+    Gameboard gb = Gameboard(20, 30);
+    gb.initState();
+    gb.printGameBoard();
+
+    ASSERT((gb.getNeighbors(5, 5) == 2), "Neighbors: south, south-east");
+    ASSERT((gb.getNeighbors(6, 5) == 3), "Neighbors: north, east, south-east");
+    ASSERT((gb.getNeighbors(6, 6) == 4), "Neighbors: north-west, west, east, south");
+    
+    gb.updateGame();  // could update upgateGame to return true here and keep a while loop running this main -- while updateGame == true, keep looping and updating. when false, end loop (end game).
+    gb.printGameBoard();
 
     return 0;
-
 }
 
 
