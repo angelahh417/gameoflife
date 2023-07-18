@@ -1,0 +1,25 @@
+    vec = [vec1, vec2, vec3]
+        = [
+    (vec1)  [Cell1, Cell2, Cell3, Cell4, Cell5, Cell6],
+    (vec2)  [Cell7, Cell8, Cell, Cell, Cell, Cell],
+    (vec3)  [Cell20, Cell, Cell, Cell, Cell, Cell],
+
+        ]
+
+    vec[2][0] = Cell20
+
+
+
+
+    good
+    . . . . . .
+    . . . . . .
+    . . . . . .
+
+    bad
+    . . .
+    . . .
+    . . .
+    . . .
+    . . .
+    . . .
